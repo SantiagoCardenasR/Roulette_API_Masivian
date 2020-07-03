@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Cardwar11\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Cardwar11\\.nuget\\packages"
+    ]
+  }
+}
