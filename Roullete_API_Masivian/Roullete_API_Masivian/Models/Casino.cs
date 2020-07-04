@@ -10,29 +10,11 @@ namespace Roulette_API_Masivian.Models
     public class Casino
     {
         public List<Player> players { get; set; }
-        public List<Roulette> _roulettes { get; set; }
-
-        public Casino()
+        public List<Roulette> roulettes { get; set; }
+        public Casino(List<Player> pPlayers, List<Roulette> pRoulettes)
         {
-            players = new List<Player>();
-            _roulettes = new List<Roulette>();
-        }
-        public Roulette getRouletteById(int pId)
-        {
-            Roulette rouletteToFind = null;
-            for (int i=0;i<_roulettes.Count;i++)
-            {
-                Roulette actual = _roulettes[i];
-                if (actual.rouletteId == pId)
-                {
-                    rouletteToFind = actual;
-                }
-            }
-            return rouletteToFind;
-        }
-        public void addRoulette(Roulette newRoulette)
-        {
-            _roulettes.Add(newRoulette);
+            players = pPlayers;
+            roulettes = pRoulettes;
         }
     }
 }

@@ -34,3 +34,4 @@ D:\C# Projects\Roulette_API_Masivian\Roullete_API_Masivian\Roullete_API_Masivian
 D:\C# Projects\Roulette_API_Masivian\Roullete_API_Masivian\Roullete_API_Masivian\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\C# Projects\Roulette_API_Masivian\Roullete_API_Masivian\Roullete_API_Masivian\obj\Debug\netcoreapp3.1\Roulette_API_Masivian.csproj.CoreCompileInputs.cache
 D:\C# Projects\Roulette_API_Masivian\Roullete_API_Masivian\Roullete_API_Masivian\obj\Debug\netcoreapp3.1\Roulette_API_Masivian.MvcApplicationPartsAssemblyInfo.cache
+D:\C# Projects\Roulette_API_Masivian\Roullete_API_Masivian\Roullete_API_Masivian\obj\Debug\netcoreapp3.1\Roulette_API_Masivian.csprojAssemblyReference.cache
