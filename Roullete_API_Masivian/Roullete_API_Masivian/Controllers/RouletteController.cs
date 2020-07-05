@@ -61,8 +61,8 @@ namespace Roullete_API_Masivian.Controllers
         [HttpGet("Ruleta{id}")]
         public IActionResult getRouletteById(long id)
         {
-            var rouletteToFInd = cachingProvider.Get<Roulette>(id.ToString());
-            return Ok("Bienvenido, te encuentras en la ruleta con Id: " + rouletteToFInd.Value.rouletteId + "\n" + " Las apuestas actuales son: \n" + actualBetsInRoulette(rouletteToFInd.Value));
+            var rouletteToFInd = findRoulette(id);
+            return Ok("Bienvenido, te encuentras en la ruleta con Id: " + rouletteToFInd.rouletteId + "\n" + " Las apuestas actuales son: \n" + actualBetsInRoulette(rouletteToFInd));
         }
         [HttpGet("jugador{id}")]
         public IActionResult getPlayerById(long id)
@@ -98,19 +98,25 @@ namespace Roullete_API_Masivian.Controllers
         public IActionResult closeRoulette(long id)
         {
             String response = "";
-            Roulette actualRoulette = findRoulette(id);
-            roulettes = this.cachingProvider.Get<List<Roulette>>("Roulettes").Value;
-            response += "La ruleta con id: " + id + " ha sido cerrada exitosamente, ya no se admiten más apuestas, las apuestas realizadas son: \n";
-            if (actualRoulette.rouletteId == id && actualRoulette.isActive == true)
+            List<Roulette> actualRoulettes = cachingProvider.Get<List<Roulette>>("Roulettes").Value;
+            response += "La ruleta con id: " + id + "Ha sido cerrada exitosamente, ya no se aceptarán más apuestas. Las apuestas realizadas son: \n";
+            for (int i = 0; i < actualRoulettes.Count; i++)
             {
-                actualRoulette.isActive = false;
-                this.cachingProvider.Set(cacheKey: "Roulettes", cacheValue: roulettes, expiration: TimeSpan.FromDays(5));
-                String betsToDisplay = actualBetsInRoulette(actualRoulette);
-                response += betsToDisplay;
-            }
-            else
-            {
-                return Ok("La ruleta se encuentra cerrada actualmente.");
+                Roulette actualRoulette = actualRoulettes[i];
+                if (actualRoulette.rouletteId == id && actualRoulette.isActive == true)
+                {
+                    actualRoulette.isActive = false;
+                    this.cachingProvider.Set(cacheKey: "Roulettes", cacheValue: actualRoulettes, expiration: TimeSpan.FromDays(5));
+                    response += actualBetsInRoulette(actualRoulette);
+                }
+                else
+                {
+                    if (actualRoulette.rouletteId == id && actualRoulette.isActive == false)
+                    {
+                        response += "La ruleta con id: " + id + " ya está abierta y lista para recibir apuestas";
+                        return Ok(response);
+                    }
+                }
             }
             return Ok(response);
         }
